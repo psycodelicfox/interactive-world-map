@@ -1,0 +1,17 @@
+.worldmap-container svg {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .worldmap-container svg path {
+    fill: black;
+    stroke: white;
+    stroke-width: 0.5;
+  }
+  
+  .worldmap-container svg path:hover {
+    fill: #45cf83;
+    cursor: pointer;
+  }
+  
