@@ -80,14 +80,13 @@ export class WorldmapComponent implements OnInit {
       }
     });
     if (this.countryId) {
-          this.countryService.getAdditionalInfo(this.countryId).subscribe({
-            next: (data) => {
-              const allData = data[1][0];
-              this.countryAdditionalFactOne = allData.countryiso3code;
-              this.countryAdditionalFactTwo = allData.value.toString();
-            }
-          }) 
+      this.countryService.getAdditionalInfo(this.countryId).subscribe({
+        next: (data) => {
+          const allData = data[1][0];
+          this.countryAdditionalFactOne = allData.countryiso3code;
+          this.countryAdditionalFactTwo = allData.value.toString();
+        }
+      }) 
+          } 
     }
   }
-  
-}
