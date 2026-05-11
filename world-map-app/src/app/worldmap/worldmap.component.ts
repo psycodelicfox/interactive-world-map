@@ -26,7 +26,7 @@ export class WorldmapComponent implements OnInit {
   
   ngOnInit(): void {
     // Load the SVG content and inject it into the component
-    this.http.get('../../assets/World-Map.svg', { responseType: 'text' }).subscribe(svgContent => {
+    this.http.get('assets/World-Map.svg', { responseType: 'text' }).subscribe(svgContent => {
       const container = this.el.nativeElement.querySelector('.worldmap-container');
       container.innerHTML = svgContent;
       this.addEventListeners(container);
