@@ -1,6 +1,6 @@
 # Interactive World Map
 
-https://psycodelicfox.github.io/interactive-world-map/worldmap
+project link: https://psycodelicfox.github.io/interactive-world-map/worldmap  
 
 An Angular application that turns a static SVG world map into an interactive data explorer. Hover any country to highlight it and pull live development data from the World Bank Open Data API.
 
