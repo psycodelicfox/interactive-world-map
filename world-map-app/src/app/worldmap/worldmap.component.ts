@@ -82,11 +82,21 @@ export class WorldmapComponent implements OnInit {
     if (this.countryId) {
       this.countryService.getAdditionalInfo(this.countryId).subscribe({
         next: (data) => {
-          const allData = data[1][0];
-          this.countryAdditionalFactOne = allData.countryiso3code;
-          this.countryAdditionalFactTwo = allData.value.toString();
+          const records = data[1];
+          const latest = records?.find((r: any) => r.value !== null);
+          if (latest) {
+            this.countryAdditionalFactOne = latest.countryiso3code;
+            this.countryAdditionalFactTwo = `${Number(latest.value).toLocaleString()} (${latest.date})`;
+          } else {
+            this.countryAdditionalFactOne = null;
+            this.countryAdditionalFactTwo = 'No data available';
+          }
+        },
+        error: (err) => {
+          console.error('Population fetch failed:', err);
+          this.countryAdditionalFactTwo = 'Unavailable';
         }
-      }) 
+      })  
           } 
     }
   }
