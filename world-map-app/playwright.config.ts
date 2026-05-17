@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import test, { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -25,31 +25,39 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-        baseURL: 'https://psycodelicfox.github.io/interactive-world-map/worldmap',
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'chromium-local',
+      use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:4200/worldmap' }, 
+      testIgnore: /.*\.smoke\.spec\.ts/,
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'firefox-local',
+      use: { ...devices['Desktop Firefox'], baseURL: 'http://localhost:4200/worldmap' }, 
+      testIgnore: /.*\.smoke\.spec\.ts/,
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'webkit-local',
+      use: { ...devices['Desktop Safari'], baseURL: 'http://localhost:4200/worldmap' }, 
+      testIgnore: /.*\.smoke\.spec\.ts/,
     },
 
+    {
+      name: 'cromium-prod',
+      use: { ...devices['Desktop Chrome'], baseURL: 'http://psycodelicfox.github.io/interactive-world-map/worldmap'},
+      testMatch: /.*\.smoke\.spec\.ts/,
+    },
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -72,9 +80,10 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    command: 'npm run start',
+    url: 'http://localhost:4200',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
+  },
 });
