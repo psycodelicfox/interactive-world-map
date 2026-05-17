@@ -1,4 +1,4 @@
-import test, { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -38,26 +38,27 @@ export default defineConfig({
     {
       name: 'chromium-local',
       use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:4200/worldmap' }, 
-      testIgnore: /.*\.smoke\.spec\.ts/,
+      //testIgnore: /.*\.smoke\.spec\.ts/,
     },
 
     {
       name: 'firefox-local',
       use: { ...devices['Desktop Firefox'], baseURL: 'http://localhost:4200/worldmap' }, 
-      testIgnore: /.*\.smoke\.spec\.ts/,
+      //testIgnore: /.*\.smoke\.spec\.ts/,
     },
 
     {
       name: 'webkit-local',
       use: { ...devices['Desktop Safari'], baseURL: 'http://localhost:4200/worldmap' }, 
-      testIgnore: /.*\.smoke\.spec\.ts/,
+      //testIgnore: /.*\.smoke\.spec\.ts/,
     },
 
-    {
-      name: 'cromium-prod',
-      use: { ...devices['Desktop Chrome'], baseURL: 'http://psycodelicfox.github.io/interactive-world-map/worldmap'},
+    /*{
+      name: 'chromium-prod',
+      use: { ...devices['Desktop Chrome'], baseURL: 'https://psycodelicfox.github.io/interactive-world-map/worldmap'},
       testMatch: /.*\.smoke\.spec\.ts/,
-    },
+    },*/
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
