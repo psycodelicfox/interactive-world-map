@@ -13,7 +13,7 @@ test.describe('Country hover interactions', () => {
         await germany.hover();
 
         // The panel updates after two API calls complete (country info, then population)
-        const panel = page.locator('app-country-info');
+        const panel = page.locator('app-countryinfo');
         await expect(panel).toContainText('Country Name: Germany');
         await expect(panel).toContainText('Capital: Berlin');
         await expect(panel).toContainText('Region: Europe & Central Asia');
