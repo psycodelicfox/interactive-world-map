@@ -18,5 +18,7 @@ test.describe('Country hover interactions', () => {
         await expect(panel).toContainText('Capital: Berlin');
         await expect(panel).toContainText('Region: Europe & Central Asia');
         await expect(panel).toContainText('Income Level: High income');
-    })
+    });
+
+    
 });
