@@ -20,5 +20,23 @@ test.describe('Country hover interactions', () => {
         await expect(panel).toContainText('Income Level: High income');
     });
 
-    
+    test('hovering a second country replaces the first country data', async ({ page }) => {
+    await page.goto('/worldmap');
+
+    const germany = page.locator('path#de');
+    const japan = page.locator('path#jp');
+    await expect(germany).toBeAttached({ timeout: 10_000 });
+
+    // Hover Germany first, wait for its data to load
+    await germany.hover();
+    const panel = page.locator('app-countryinfo');
+    await expect(panel).toContainText('Country Name: Germany');
+
+    // Hover Japan, panel should swap
+    await japan.hover();
+    await expect(panel).toContainText('Country Name: Japan');
+    await expect(panel).toContainText('Capital: Tokyo');
+    // Germany's data should no longer be present
+    await expect(panel).not.toContainText('Berlin');
+  });
 });
